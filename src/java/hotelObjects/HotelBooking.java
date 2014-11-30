@@ -34,9 +34,7 @@ public class HotelBooking {
     }
 
     public String createBookingNumber(int days, int hotelId) {
-        int cardGuarenteeInt = (creditCardGuarentee) ? 1 : 0;
-        
-        return priceForStay + "-" + cardGuarenteeInt + hotelId;
+        return priceForStay + "-" + hotelId;
     }
 
     public boolean isCreditCardGuarentee() {
