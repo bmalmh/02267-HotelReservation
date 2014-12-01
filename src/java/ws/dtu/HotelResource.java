@@ -1,10 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package ws.dtu;
 
-import com.google.gson.Gson;
+import com.thoughtworks.xstream.XStream;
 import dk.dtu.imm.fastmoney.BankService;
 import dk.dtu.imm.fastmoney.CreditCardFaultMessage;
 import hotelObjects.HotelBooking;
@@ -27,11 +23,18 @@ public class HotelResource {
     static ArrayList<HotelData> mockHotelData = HotelDataCreator.getHotelData();
     final int group = 1;
     
-    public String getHotels(String city, String arrivalDate, String departureDate ) {
+    public String getHotels(String city, String arrivalDate, String departureDate ) throws Exception{
         ArrayList<HotelBooking> result = new ArrayList<HotelBooking>();
         DateTimeFormatter format = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm");
-        DateTime start = format.parseDateTime(arrivalDate);
-        DateTime end = format.parseDateTime(departureDate);
+        DateTime start;
+        DateTime end;
+        try{
+            start = format.parseDateTime(arrivalDate);
+            end = format.parseDateTime(departureDate);
+        }catch(Exception e){
+            throw new Exception("Not a valid date", e);
+        }
+        
         int days = Days.daysBetween(start, end).getDays();
         
         for (HotelData hd : mockHotelData) {
@@ -40,9 +43,11 @@ public class HotelResource {
             }
         }
 
-        String json = new Gson().toJson(result);
-        
-        return json;
+        XStream xstream = new XStream();
+
+        String xml = xstream.toXML(result);
+                
+        return xml;
     }
     
     public boolean bookHotel
