@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<inspection xmlns="http://schemas.xmlsoap.org/ws/2001/10/inspection/">
+   <service>
+      <name>NiceView</name>
+      <abstract>Hotel reservation service used to get a list of hotels, book a hotel, or cancel a hotel</abstract>
+      <description referencedNamespace="http://schemas.xmlsoap.org/wsdl/"
+	   location="http://localhost:8080/HotelReservationService/HotelReservationService?wsdl"></description>
+   </service>
+   <link referencedNamespace="http://schemas.xmlsoap.org/wsdl/" 
+         location="http://localhost:8080/AirlineReservationService/inspection.wsil" >
+      <abstract>Airline reservation service used to get a list of flights, book a flight, or cancel a flight.</abstract>
+   </link>
+   <link referencedNamespace="http://schemas.xmlsoap.org/wsdl/" 
+         location="http://localhost:8080/TravelAgencyService/inspection.wsil" >
+      <abstract>Travelgood service to create travel iterenarys</abstract>
+   </link>
+</inspection>
